@@ -43,13 +43,17 @@ lazy val dependencies =
     val pureconfig     = "com.github.pureconfig"      %% "pureconfig"              % pureconfigV
     val scalatest      = "org.scalatest"              %% "scalatest"               % scalatestV
     val scalacheck     = "org.scalacheck"             %% "scalacheck"              % scalacheckV
+    val rxjs           = "io.reactivex"               %% "rxscala"                 % "0.26.5"
+    val github         = "org.eclipse.mylyn.github" % "org.eclipse.egit.github.core" % "2.1.5"
   }
 
 lazy val commonDependencies = Seq(
   dependencies.typesafeConfig,
   dependencies.akka,
   dependencies.scalatest  % "test",
-  dependencies.scalacheck % "test"
+  dependencies.scalacheck % "test",
+  dependencies.rxjs,
+  dependencies.github
 )
 
 lazy val settings = Seq(
