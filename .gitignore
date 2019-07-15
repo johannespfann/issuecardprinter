@@ -2,6 +2,8 @@
 
 target/
 
+application.conf
+output.html
 
 ## intellij
 
