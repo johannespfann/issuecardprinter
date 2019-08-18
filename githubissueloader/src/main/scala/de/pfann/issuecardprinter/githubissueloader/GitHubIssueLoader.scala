@@ -1,6 +1,6 @@
 package de.pfann.issuecardprinter.githubissueloader
 
-import de.pfann.issuecardprinter.configuration.GitHubConfigs
+import de.pfann.issuecardprinter.configuration.GitHubConfig
 import de.pfann.issuecardprinter.issueloader.issueloader.IssueLoader
 import de.pfann.issuecardprinter.issueloader.model.IssueItem
 import github4s.Github
@@ -8,8 +8,7 @@ import github4s.Github._
 import github4s.jvm.Implicits._
 import scalaj.http.HttpResponse
 
-class GitHubIssueLoader(gitHubConfigs: GitHubConfigs) extends IssueLoader{
-
+class GitHubIssueLoader(gitHubConfigs: GitHubConfig) extends IssueLoader{
 
   override def loadIssue(issueId: String): Option[IssueItem] = {
 
@@ -25,9 +24,9 @@ class GitHubIssueLoader(gitHubConfigs: GitHubConfigs) extends IssueLoader{
 
   override def loadIssues(): Option[Seq[IssueItem]] = {
 
-    val username: String = gitHubConfigs.getUsername
-    val projectname: String = gitHubConfigs.projectName
-    val token: String = gitHubConfigs.token
+    val username: String = gitHubConfigs.getUsername()
+    val projectname: String = gitHubConfigs.getProjectName()
+    val token: String = gitHubConfigs.getAccessToken()
 
     val listIssues = Github(Option(token)).issues.listIssues(username, projectname)
 
