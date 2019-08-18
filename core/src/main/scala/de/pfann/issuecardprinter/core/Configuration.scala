@@ -1,6 +1,7 @@
-package de.pfann.issuecardprinter.configuration
+package de.pfann.issuecardprinter.core
 
 import com.typesafe.config.ConfigFactory
+import de.pfann.issuecardprinter.githubissueloader.{GitHubConfig, GitHubConfigBuilder}
 
 class Configuration(val path: String) {
 

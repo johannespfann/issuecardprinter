@@ -7,11 +7,11 @@ lazy val global = project
   .settings(settings)
   .aggregate(
     githubissueloader,
-    api,
+    loaderapi,
+    printerapi,
+    coreapi,
     core,
-    printer,
-    githubissueloader,
-    configurationloader,
+    filetemplateprinter
   )
 
 lazy val core = project
@@ -19,49 +19,61 @@ lazy val core = project
     settings
   )
   .dependsOn(
-    configurationloader,
-    githubissueloader
+    githubissueloader,
+    filetemplateprinter
   )
 
-lazy val api = project
+lazy val coreapi = project
   .settings(
     settings
+  )
+
+lazy val printerapi = project
+  .settings(
+    settings
+  )
+  .dependsOn(
+    coreapi
+  )
+
+lazy val loaderapi = project
+  .settings(
+    settings
+  )
+  .dependsOn(
+    coreapi
   )
 
 lazy val githubissueloader = project
   .settings(
     settings,
-    libraryDependencies ++= commonDependencies
+    libraryDependencies ++= githubissueloader_dependencies
   )
   .dependsOn(
-    api,
-    configurationloader
+    loaderapi,
+    coreapi
   )
 
 
-lazy val printer = project
+lazy val filetemplateprinter = project
   .settings(
     settings,
     libraryDependencies ++= commonDependencies
   )
-
-lazy val configurationloader = project
-  .settings(
-    settings,
-    libraryDependencies ++= configurationloader_dependencies
-  )
   .dependsOn(
-    api
-  )
+    printerapi
+)
 
-lazy val configurationloader_dependencies = Seq(
-  dependencies.typesafeConfig,
+lazy val githubissueloader_dependencies = Seq(
   dependencies.rxjs,
+  dependencies.github4s,
+  dependencies.scalate,
   dependencies.scalatest  % "test",
   dependencies.scalacheck % "test"
 )
 
 lazy val commonDependencies = Seq(
+  dependencies.typesafeConfig,
   dependencies.rxjs,
   dependencies.github4s,
   dependencies.scalate,

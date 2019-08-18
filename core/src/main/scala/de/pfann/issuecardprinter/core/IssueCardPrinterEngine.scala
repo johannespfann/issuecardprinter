@@ -1,19 +1,17 @@
 package de.pfann.issuecardprinter.core
 
-import de.pfann.issuecardprinter.configuration.GitHubConfig
-import de.pfann.issuecardprinter.githubissueloader.GitHubIssueLoader
-import de.pfann.issuecardprinter.issueloader.model.IssueItem
+import de.pfann.issuecardprinter.issueloader.issueloader.IssueLoader
+import de.pfann.issuecardprinter.printer.FileTemplatePrinter
 
 
-class IssueCardPrinterEngine(gitHubConfigs: GitHubConfig) {
+class IssueCardPrinterEngine(loader: IssueLoader,printer: FileTemplatePrinter) {
 
   def process(): Unit = {
       println("Start printer")
-      val loader = new GitHubIssueLoader(gitHubConfigs)
-
       val issues = loader.loadIssues().get
-
-
+      println("print " + issues.size + " issues ...")
+      printer.printIssues(issues)
+      println("printer succeeded")
     }
 
 }
