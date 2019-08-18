@@ -1,14 +1,15 @@
 package de.pfann.issuecardprinter.githubissueloader
 
-import de.pfann.issuecardprinter.configuration.GitHubConfig
+
+import de.pfann.issuecardprinter.coreapi.model.IssueItem
 import de.pfann.issuecardprinter.issueloader.issueloader.IssueLoader
-import de.pfann.issuecardprinter.issueloader.model.IssueItem
 import github4s.Github
 import github4s.Github._
+import github4s.free.domain.User
 import github4s.jvm.Implicits._
 import scalaj.http.HttpResponse
 
-class GitHubIssueLoader(gitHubConfigs: GitHubConfig) extends IssueLoader{
+class GitHubIssueLoader(gitHubConfigs: GitHubConfig) extends IssueLoader {
 
   override def loadIssue(issueId: String): Option[IssueItem] = {
 
@@ -37,9 +38,11 @@ class GitHubIssueLoader(gitHubConfigs: GitHubConfig) extends IssueLoader{
 
         r.result.foreach(issue => {
           val id: String = issue.id.toString
-          val body: String = issue.body.get
-          val assigned: String = ""
-          val issueItem = new IssueItem(id, issue.title, "N/A", body, assigned)
+          val body: String = issue.body.getOrElse("no description")
+          val user = new User(1, "no assignee", "", "")
+          val assigned: String = issue.assignee.getOrElse(user).login
+          val priority: String = ""
+          val issueItem = new IssueItem(id, issue.title, priority, body, assigned)
           result = result :+ issueItem
         })
 

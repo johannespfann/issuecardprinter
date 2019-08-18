@@ -1,4 +1,4 @@
-package de.pfann.issuecardprinter.configuration
+package de.pfann.issuecardprinter.githubissueloader
 
 trait ConfigBuilder {
 
