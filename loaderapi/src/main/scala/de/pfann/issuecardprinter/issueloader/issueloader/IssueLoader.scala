@@ -1,6 +1,6 @@
 package de.pfann.issuecardprinter.issueloader.issueloader
 
-import de.pfann.issuecardprinter.issueloader.model.IssueItem
+import de.pfann.issuecardprinter.coreapi.model.IssueItem
 
 trait IssueLoader {
 
