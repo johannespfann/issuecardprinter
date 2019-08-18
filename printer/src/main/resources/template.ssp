@@ -1,15 +1,22 @@
-<%@ var name:(String,String) %>
-<%@ var city:String %>
+<%@ var issue_id:String%>
+<%@ var issue_title:String %>
+<%@ var issue_description:String %>
+<%@ var issue_assigned:String %>
+<%@ var issue_priority:String %>
 
 <!DOCTYPE html>
 <html lang="de">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>${name._1} | ${name._2}</title>
+    <title>${issue_title}</title>
 </head>
 <body>
-    <p> Hello ${name._1} ${name._2}, from ${city}. </p>
+    <p>${issue_id}</p>
+    <p>${issue_title}</p>
+    <p>${issue_description}</p>
+    <p>${issue_assigned}</p>
+    <p>${issue_priority}</p>
 </body>
 </html>
 

@@ -5,7 +5,6 @@ import java.io._
 
 import de.pfann.issuecardprinter.issueloader.model.IssueItem
 
-
 class PrintEngine(val printerConfig: PrinterConfig) {
 
   def printIssue(aContent: IssueItem): Unit = {
@@ -20,10 +19,9 @@ class PrintEngine(val printerConfig: PrinterConfig) {
 
     val pw = new PrintWriter(new File(printerConfig.getOutputPath() ))
     pw.write(output)
-    pw.close
+    pw.close()
     println(output)
   }
-
 
 
 }
