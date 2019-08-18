@@ -1,0 +1,46 @@
+#import(de.pfann.issuecardprinter.coreapi.model.IssueItem)
+
+<%@ var issues_title:String%>
+<%@ var issues:Seq[IssueItem]%>
+
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="issue-item.css" />
+    <title>${issues_title}</title>
+</head>
+<body>
+
+    <div class="container-float">
+        <div class="row">
+
+            #for (issue <- issues)
+
+                <div class="col-sm-6 d-flex align-items-stretch">
+                    <div class="card w-100 pt-2 mt-2">
+                        <div class="card-header">
+                            <div class="item-title float-left">${issue.titel}</div>
+                            <div class="float-right">${issue.priority}</div>
+                            <br>
+                            <div class="float-left">${issue.assigned}</div>
+                        </div>
+
+                        <div class="card-body">
+                            <p class="card-text" style="width: 100%, height: 145px; overflow: hidden;">${issue.description}</p>
+                        </div>
+                    </div>
+                </div>
+
+            #end
+
+
+        </div>
+    </div>
+</body>
+</html>
+
+
