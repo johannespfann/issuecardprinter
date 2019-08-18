@@ -8,6 +8,7 @@ import de.pfann.issuecardprinter.coreapi.model.IssueItem
 class FileTemplatePrinter(val printerConfig: PrinterConfig) extends Printer {
 
   def printIssues(aContent: Seq[IssueItem]): Unit = {
+
     val engine = new TemplateEngine
     val output = engine.layout(printerConfig.getPathToTemplate(),
       Map(
@@ -17,6 +18,5 @@ class FileTemplatePrinter(val printerConfig: PrinterConfig) extends Printer {
     pw.write(output)
     pw.close()
   }
-
 
 }
